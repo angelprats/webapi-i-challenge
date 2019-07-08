@@ -15,8 +15,20 @@ server.post('/api/users', (req, res) => {
     } else {
         db.insert(apiInfo)
         .then(user => res.status(201).json(user))
-        .catch(err => res.status(500).json({ error: "There was an error while saving the user to the database" }))
+        .catch(err => res.status(500).json({ error: "There was an error while saving the user to the database" }));
     }
+})
+
+server.get('/api/users', (req, res) => {
+    db.find()
+    .then(users => res.status(200).json(users))
+    .catch(err => res.status(500).json({ error: "The user information could not be retrieved." }))
+})
+
+server.get('/api/users', (req, res) => {
+    db.findById(id)
+    .then(users => res.status(200).json(users))
+    .catch(err => res.status(404).json({ message: "The user with specified id does not exist." }));
 })
 
 
