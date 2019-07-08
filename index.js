@@ -8,8 +8,21 @@ const db = require('./data/db.js');
 
 server.use(express.json());
 
-const port = process.env.PORT || 8000;
+server.post('/api/users', (req, res) => {
+    const apiInfo = req.body;
+    if(!apiInfo.name || !apiInfo.bio) {
+        res.status(400).json({message: 'Please provide a name and bio for the user'});
+    } else {
+        db.insert(apiInfo)
+        .then(user => res.status(201).json(user))
+        .catch(err => res.status(500).json({ error: "There was an error while saving the user to the database" }))
+    }
+})
 
+
+
+
+const port = process.env.PORT || 8000;
 server.listen(port, () => console.log(`server is running on port ${port}`));
 
   
