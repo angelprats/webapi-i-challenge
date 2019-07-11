@@ -6,7 +6,11 @@ const server = express();
 
 server.use(express.json());
 
+server.get('/', (req, res) => {
+    res.status('Hello World!!!!')
+} 
 
+)
 server.post('/api/users', (req, res) => {
     const apiInfo = req.body;
     if(!apiInfo.name || !apiInfo.bio) {
