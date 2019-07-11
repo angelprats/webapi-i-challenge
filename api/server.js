@@ -7,7 +7,7 @@ const server = express();
 server.use(express.json());
 
 server.get('/', (req, res) => {
-    res.status('Hello World!!!!')
+    res.send('Hello World!!!!')
 } 
 
 )
